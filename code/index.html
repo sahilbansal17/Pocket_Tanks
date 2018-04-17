@@ -14,23 +14,41 @@
     </body>
 
     <script>
+        // stage for referencing the canvas element
         var stage = new createjs.Stage("terrain");
+        
+        // canvas and its width, height
         var canvas = document.getElementById("terrain");
         var width = canvas.width;
         var height = canvas.height;
+        
+        // gets a random value of y coordinate between min and max (uniform distribution)
+        function getUniformRandomY(min, max){
+            return Math.floor(Math.random() * (max - min)) + min;
+        }
+        
+        // draws the terrain 
         function drawTerrain(){
-            var points = []; 
-            var numPoints = width * 4;
-            var y = 3 * height / 4;
-            var line = new createjs.Shape();
-            points.push([0, y]);
-            for(var x = 0.25; x < width; x += 0.25){
+            var points = []; // list of points 
+            var factor = 100; // distance between two points of terrain curve
+            var numPoints = width/factor; // number of points 
+        
+            var line = new createjs.Shape(); // shape defining the terrain curve 
+            points.push([0, 3 * height/4]); // intial point
+            
+            for(var x = factor; x <= width; x += factor){
+                var y = getUniformRandomY(height/2, 3 * height/4); // min = h/2, max = 3h/4
                 points.push([x, y]);
-                line.graphics.setStrokeStyle(3).beginStroke("#F00");
-                line.graphics.moveTo(x - 0.25, y).lineTo(x, y);
-                line.graphics.endStroke();
             }
-            // console.log(points);
+            
+            // add graphics to the shape 
+            line.graphics.setStrokeStyle(3).beginStroke("#F00");
+            for(var ptCt = 1; ptCt <= numPoints; ptCt ++){
+                line.graphics.moveTo(points[ptCt - 1][0], points[ptCt - 1][1]).lineTo(points[ptCt][0], points[ptCt][1]);
+            }
+            line.graphics.endStroke();
+            
+            // render it on the stage
             stage.addChild(line);
             stage.update();
         }
