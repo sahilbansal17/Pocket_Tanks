@@ -1,0 +1,39 @@
+<html>
+
+    <head>
+        <title>
+        Randomly Generated Terrain
+        </title>
+        <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    </head>
+
+    <body onLoad="drawTerrain();">
+
+        <canvas id="terrain" width="800" height="600"></canvas>
+
+    </body>
+
+    <script>
+        var stage = new createjs.Stage("terrain");
+        var canvas = document.getElementById("terrain");
+        var width = canvas.width;
+        var height = canvas.height;
+        function drawTerrain(){
+            var points = []; 
+            var numPoints = width * 4;
+            var y = 3 * height / 4;
+            var line = new createjs.Shape();
+            points.push([0, y]);
+            for(var x = 0.25; x < width; x += 0.25){
+                points.push([x, y]);
+                line.graphics.setStrokeStyle(3).beginStroke("#F00");
+                line.graphics.moveTo(x - 0.25, y).lineTo(x, y);
+                line.graphics.endStroke();
+            }
+            // console.log(points);
+            stage.addChild(line);
+            stage.update();
+        }
+    </script>
+
+</html>
