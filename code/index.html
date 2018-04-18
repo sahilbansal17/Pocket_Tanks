@@ -30,7 +30,7 @@
         // draws the terrain 
         function drawTerrain(){
             var points = []; // list of points 
-            var factor = 100; // distance between two points of terrain curve
+            var factor = 80; // distance between two points of terrain curve
             var numPoints = width/factor; // number of points 
         
             var line = new createjs.Shape(); // shape defining the terrain curve 
@@ -42,15 +42,21 @@
             }
             
             // add graphics to the shape 
-            line.graphics.setStrokeStyle(3).beginStroke("#F00");
+            line.graphics.beginLinearGradientFill(["#0F0","#040"], [0, 1], 0, 3 * height/4, 0, height);
+            line.graphics.beginStroke("#040").setStrokeStyle(3);
+            // line.graphics.beginLinearGradientFill(["#0F0","#040"], [0, 1], 0, 20, 0, 120).drawRect(20, 20, 120, 120);
             for(var ptCt = 1; ptCt <= numPoints; ptCt ++){
+                line.graphics.drawRect(points[ptCt - 1][0], points[ptCt - 1][1], factor, height - points[ptCt - 1][1]);
                 line.graphics.moveTo(points[ptCt - 1][0], points[ptCt - 1][1]).lineTo(points[ptCt][0], points[ptCt][1]);
             }
-            line.graphics.endStroke();
+            line.graphics.endFill();
             
             // render it on the stage
             stage.addChild(line);
             stage.update();
+            
+            // bound the shape 
+            
         }
     </script>
 
