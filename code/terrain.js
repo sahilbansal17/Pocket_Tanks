@@ -11,10 +11,10 @@ canvas.height = window.innerHeight - window.innerHeight/5;
 var width = canvas.width;
 var height = canvas.height;
 
+var points = [] ;
 // draws the terrain 
 function drawTerrain(){
-    var points = [] ;
-    var displace = 0; // for intial setting up of the tanks and basic game 
+    var displace = height/4; // for intial setting up of the tanks and basic game 
     var roughness = 0.6;
     // Gives us a power of 2 based on our width
     var power = Math.pow(2, Math.ceil(Math.log(width) / (Math.log(2))));
@@ -76,7 +76,6 @@ function drawTerrain(){
 
     // render it on the stage
     stage.addChild(line);
-    stage.update();    
-    
+    stage.update();
     showTanks();
 }
