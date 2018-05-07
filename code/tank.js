@@ -19,7 +19,7 @@ nozzle2.regY = 10;
 
 // try rotating the nozzles around the registration points
 nozzle1.rotation = -30;
-nozzle2.rotation = 30;
+nozzle2.rotation = -330;
 
 function showTanks(){
 //    console.log(points);

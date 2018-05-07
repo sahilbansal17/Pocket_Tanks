@@ -54,11 +54,27 @@
             <div class="weaponOnly" ng-show="controls.tab===2">
                 
             </div>
-            <div class="angleOnly" ng-show="controls.tab===3">
-                
+            <div class="angleOnly btn-group btn-group-justified" ng-show="controls.tab===3" ng-init="controls.angle=30">
+                <div class="btn-group">
+                    <button class="btn btn-info btn-lg">Angle: {{controls.angle}} </button>
+                </div>
+                <div class="btn-group">
+                  <input type="range" min="0" max="360" id="angleSlider" ng-model="controls.angle" ng-change="controls.updateAngle()">
+                </div>
+                <div class="btn-group" ng-click="controls.reset()">
+                    <button class="glyphicon glyphicon-ok btn btn-lg btn-success" id="angleDone"></button>
+                </div>
             </div>
-            <div class="powerOnly" ng-show="controls.tab===4">
-                
+            <div class="powerOnly btn-group btn-group-justified" ng-show="controls.tab===4" ng-init="controls.power=60">
+                 <div class="btn-group">
+                    <button class="btn btn-info btn-lg">Power: {{controls.power}} </button>
+                </div>
+                <div class="btn-group">
+                  <input type="range" min="1" max="100" id="powerSlider" ng-model="controls.power">
+                </div>
+                <div class="btn-group" ng-click="controls.reset()">
+                    <button class="glyphicon glyphicon-ok btn btn-lg btn-success" id="powerDone"></button>
+                </div>
             </div>
         </div>
     

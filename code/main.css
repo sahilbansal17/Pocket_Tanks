@@ -9,3 +9,9 @@ canvas{
     background-color: brown;
     height: 100%;
 }
+.angleOnly{
+    background-color: khaki;
+}
+.powerOnly{
+    background-color: cornsilk;
+}
