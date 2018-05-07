@@ -5,6 +5,8 @@
         Randomly Generated Terrain
         </title>
         <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <style>
             html,body{
                 overflow: hidden;
@@ -14,91 +16,10 @@
 
     <body onLoad="drawTerrain();">
 
-        <canvas id="terrain" width="800" height="600"></canvas>
+        <canvas id="terrain"></canvas>
 
     </body>
-
-    <script>
-        // stage for referencing the canvas element
-        var stage = new createjs.Stage("terrain");
-        
-        // canvas and its width, height
-        var canvas = document.getElementById("terrain");
-        
-        // set canvas width and height to the width and height of the full screen
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        var width = canvas.width;
-        var height = canvas.height;
-        
-        // draws the terrain 
-        function drawTerrain(){
-            var points = [] ;
-            var displace = height/4;
-            var roughness = 0.6;
-            // Gives us a power of 2 based on our width
-            power = Math.pow(2, Math.ceil(Math.log(width) / (Math.log(2))));
-     
-            // Set the initial left point
-            points[0] = height/2 + (Math.random()*displace*2) - displace;
-            // set the initial right point
-            points[power] = height/2 + (Math.random()*displace*2) - displace;
-            displace *= roughness;
-
-            // Increase the number of segments
-            for(var i = 1; i < power; i *=2){
-                // Iterate through each segment calculating the center point
-                for(var j = (power/i)/2; j < power; j+= power/i){
-                    points[j] = ((points[j - (power / i) / 2] + points[j + (power / i) / 2]) / 2);
-                    points[j] += (Math.random()*displace*2) - displace
-                }
-                // reduce our random range
-                displace *= roughness;
-            }    
-            
-            console.log(power);
-            var numPoints = power; // number of points 
-            var line = new createjs.Shape(); // shape defining the terrain curve 
-            
-            // add graphics to the shape 
-            line.graphics.beginLinearGradientFill(["#0F0","#040"], [0, 1], 0, height/2, 0, height);
-            
-            // increase height of points left to width/2
-            var delta = width/10
-            var incFactor = Math.random()*100 + 600;
-            var increment = height/100;
-            
-            for(var ptCt = width/2 - delta; ptCt < width/2; ptCt ++){
-                points[ptCt] -= increment;
-                increment += height/incFactor;
-            }
-            
-            // increase height of points right to width/2
-            for(var ptCt = width/2; ptCt < width/2 + delta; ptCt ++){
-                points[ptCt] -= increment;
-                increment -= height/incFactor;
-            }
-            
-            // if some points are near to the height of screen, update them 
-            for(var ptCt = 0; ptCt < numPoints ; ptCt ++){
-                if(points[ptCt] < 0){
-                    points[ptCt] = points[ptCt - 1];
-                }
-            }
-            
-            for(var ptCt = 0; ptCt < numPoints; ptCt ++){
-                line.graphics.drawRect(ptCt, points[ptCt], 1, height - points[ptCt]);
-            }
-            
-            console.log(points);
-            
-            line.graphics.endFill();
-            
-            // render it on the stage
-            stage.addChild(line);
-            stage.update();    
-        }
-    </script>
-
+    <script src="terrain.js"></script>
+    <script src="button.js"></script>
+    <script src="tank.js"></script>
 </html>
