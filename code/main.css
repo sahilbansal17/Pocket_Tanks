@@ -1,0 +1,11 @@
+html,body{
+    overflow: hidden;
+}
+canvas{
+    background-color: skyblue;
+}
+.buttons{
+    padding: 5px;
+    background-color: brown;
+    height: 100%;
+}

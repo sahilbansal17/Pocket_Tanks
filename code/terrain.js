@@ -6,7 +6,7 @@ var canvas = document.getElementById("terrain");
 
 // set canvas width and height to the width and height of the full screen
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight - window.innerHeight/5;
+canvas.height = window.innerHeight - window.innerHeight/15;
 
 var width = canvas.width;
 var height = canvas.height;
