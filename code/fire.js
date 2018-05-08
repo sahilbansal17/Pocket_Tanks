@@ -9,14 +9,14 @@ function fireBullet(nozzle, currentTank, power){
     bullet.regY = 3.5;
     
     // set the speed of the bullet
-    var speed = Math.sqrt(power);
+    var speed = 1.4 * Math.sqrt(power);
     var vX = speed * Math.cos(angle); // velocity in the x-direction
     var vY = speed * Math.sin(angle); // velocity in the y-direction
     
     // set the x and y coordinates and the rotation
     if(currentTank === 1){
-        bullet.x = nozzle.x + 32*Math.cos(angle);
-        bullet.y = nozzle.y + 32*Math.sin(angle);
+        bullet.x = nozzle.x + 35*Math.cos(angle);
+        bullet.y = nozzle.y + 35*Math.sin(angle);
         bullet.rotation = nozzle.rotation;
         
         // add to stage and update
@@ -27,18 +27,23 @@ function fireBullet(nozzle, currentTank, power){
         var listener = createjs.Ticker.on("tick", function updateBullet(event, data){
             bullet.x += vX;
             bullet.y += vY;
-            vY += 0.09;
+            var updateAngle = Math.atan(vY/vX) * 180 / Math.PI;
+            bullet.rotation = updateAngle;
+            vY += 0.2;
             stage.update();
 //            console.log(data.points);
 //            console.log(data.points[Math.floor(bullet.x)] + " " + bullet.y);
-            if(Math.abs(data.points[Math.floor(bullet.x)] - bullet.y) <= 10){
+            var newAngle = bullet.rotation * Math.PI / 180;
+            if(Math.abs(data.points[Math.floor(bullet.x + 35*Math.cos(newAngle))] - bullet.y) <= 10){
+                stage.removeChild(bullet);
+                stage.update();
                 createjs.Ticker.off("tick", listener);
             }
         }, null, false, {points});
     }
     else{
-        bullet.x = nozzle.x - 32*Math.cos(angle);
-        bullet.y = nozzle.y - 32*Math.sin(angle);
+        bullet.x = nozzle.x - 35*Math.cos(angle);
+        bullet.y = nozzle.y - 35*Math.sin(angle);
         bullet.rotation = nozzle.rotation - 180;
         
         // add to stage and update
@@ -49,9 +54,14 @@ function fireBullet(nozzle, currentTank, power){
          var listener = createjs.Ticker.on("tick", function updateBullet(event, data){
             bullet.x -= vX;
             bullet.y -= vY;
-            vY -= 0.09;
+            var updateAngle = Math.atan(vY/vX) * 180 / Math.PI;
+            bullet.rotation = updateAngle - 180;
+            vY -= 0.2;
             stage.update();
-            if(Math.abs(data.points[Math.floor(bullet.x)] - bullet.y) <= 10){
+            var newAngle = bullet.rotation * Math.PI / 180;
+            if(Math.abs(data.points[Math.floor(bullet.x + 35*Math.cos(newAngle))] - bullet.y) <= 10){
+                stage.removeChild(bullet);
+                stage.update();
                 createjs.Ticker.off("tick", listener);
             }
         }, null, false, {points});
