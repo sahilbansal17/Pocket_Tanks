@@ -78,4 +78,5 @@ function drawTerrain(){
     stage.addChild(line);
     stage.update();
     showTanks();
+    showScore();
 }

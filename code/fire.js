@@ -31,6 +31,11 @@ function fireBullet(nozzle, currentTank, power){
             bullet.rotation = updateAngle;
             vY += 0.2;
             stage.update();
+            
+            if(Math.abs(bullet.x - tank2.x) <= 20 && Math.abs(bullet.y - tank2.y) <= 20){
+                score1 += 10;
+                updateScore();
+            }
 //            console.log(data.points);
 //            console.log(data.points[Math.floor(bullet.x)] + " " + bullet.y);
             var newAngle = bullet.rotation * Math.PI / 180;
@@ -58,6 +63,11 @@ function fireBullet(nozzle, currentTank, power){
             bullet.rotation = updateAngle - 180;
             vY -= 0.2;
             stage.update();
+             
+            if(Math.abs(bullet.x - tank1.x) <= 20 && Math.abs(bullet.y - tank1.y) <= 20){
+                score2 += 10;
+                updateScore();
+            }
             var newAngle = bullet.rotation * Math.PI / 180;
             if(Math.abs(data.points[Math.floor(bullet.x + 35*Math.cos(newAngle))] - bullet.y) <= 10){
                 stage.removeChild(bullet);
