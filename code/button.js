@@ -21,11 +21,11 @@ buttonModule.controller("gameControls", function(){
     // switch the current tank
     this.fire = function(){
         if(this.currentTank == 1){
-            fireBullet(nozzle1, this.currentTank);
+            fireBullet(nozzle1, this.currentTank, this.power);
             this.currentTank = 2;
         }
         else{
-            fireBullet(nozzle2, this.currentTank);
+            fireBullet(nozzle2, this.currentTank, this.power);
             this.currentTank = 1;
         }
         // based on the updated tank, update the angle value
