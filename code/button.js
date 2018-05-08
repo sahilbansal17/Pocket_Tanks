@@ -44,6 +44,7 @@ buttonModule.controller("gameControls", function(){
         var tank = this.currentTank;
         if(this.tankMoves[tank - 1] >= 1){
             this.tankMoves[tank - 1] --;
+            moveTankLeft(this.currentTank); // function to actually move the tank
         }
     }
     
@@ -52,6 +53,7 @@ buttonModule.controller("gameControls", function(){
         var tank = this.currentTank;
         if(this.tankMoves[tank - 1] >= 1){
             this.tankMoves[tank - 1] --;
+            moveTankRight(this.currentTank); // function to actually move the tank
         }
     }
     
