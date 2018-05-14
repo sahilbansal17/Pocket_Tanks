@@ -9,7 +9,7 @@ function fireBullet(nozzle, currentTank, power){
     bullet.regY = 3.5;
     
     // set the speed of the bullet
-    var speed = 1.4 * Math.sqrt(power);
+    var speed = 3.0 * Math.sqrt(power);
     var vX = speed * Math.cos(angle); // velocity in the x-direction
     var vY = speed * Math.sin(angle); // velocity in the y-direction
     
@@ -29,7 +29,7 @@ function fireBullet(nozzle, currentTank, power){
             bullet.y += vY;
             var updateAngle = Math.atan(vY/vX) * 180 / Math.PI;
             bullet.rotation = updateAngle;
-            vY += 0.2;
+            vY += 0.8;
             stage.update();
             
             if(Math.abs(bullet.x - tank2.x) <= 20 && Math.abs(bullet.y - tank2.y) <= 20){
@@ -40,6 +40,12 @@ function fireBullet(nozzle, currentTank, power){
 //            console.log(data.points[Math.floor(bullet.x)] + " " + bullet.y);
             var newAngle = bullet.rotation * Math.PI / 180;
             if(Math.abs(data.points[Math.floor(bullet.x + 35*Math.cos(newAngle))] - bullet.y) <= 10){
+                stage.removeChild(bullet);
+                stage.update();
+                createjs.Ticker.off("tick", listener);
+            }
+            else if(bullet.x < 0 || bullet.x > width){
+                // if bullet goes out of the screen, remove this ticker 
                 stage.removeChild(bullet);
                 stage.update();
                 createjs.Ticker.off("tick", listener);
@@ -61,7 +67,7 @@ function fireBullet(nozzle, currentTank, power){
             bullet.y -= vY;
             var updateAngle = Math.atan(vY/vX) * 180 / Math.PI;
             bullet.rotation = updateAngle - 180;
-            vY -= 0.2;
+            vY -= 0.8;
             stage.update();
              
             if(Math.abs(bullet.x - tank1.x) <= 20 && Math.abs(bullet.y - tank1.y) <= 20){
@@ -70,6 +76,11 @@ function fireBullet(nozzle, currentTank, power){
             }
             var newAngle = bullet.rotation * Math.PI / 180;
             if(Math.abs(data.points[Math.floor(bullet.x + 35*Math.cos(newAngle))] - bullet.y) <= 10){
+                stage.removeChild(bullet);
+                stage.update();
+                createjs.Ticker.off("tick", listener);
+            }
+            else if(bullet.x < 0 || bullet.x > width){
                 stage.removeChild(bullet);
                 stage.update();
                 createjs.Ticker.off("tick", listener);
