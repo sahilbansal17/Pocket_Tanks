@@ -1,4 +1,4 @@
-var bullet = new createjs.Bitmap("../images/bullet.png");
+var bullet = new createjs.Bitmap("images/bullet.png");
 
 function fireBullet(nozzle, currentTank, power){
     // angle used for the calculation of x and y coordinate of the bullet
