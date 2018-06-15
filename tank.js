@@ -1,7 +1,7 @@
-var tank1 = new createjs.Bitmap("../images/tankVehicle1.png");
-var tank2 = new createjs.Bitmap("../images/tankVehicle2.png");
-var nozzle1 = new createjs.Bitmap("../images/tankNozzle1.png");
-var nozzle2 = new createjs.Bitmap("../images/tankNozzle2.png");
+var tank1 = new createjs.Bitmap("images/tankVehicle1.png");
+var tank2 = new createjs.Bitmap("images/tankVehicle2.png");
+var nozzle1 = new createjs.Bitmap("images/tankNozzle1.png");
+var nozzle2 = new createjs.Bitmap("images/tankNozzle2.png");
 
 // registration points for the tanks
 tank1.regX = 40;
